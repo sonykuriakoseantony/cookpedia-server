@@ -1,7 +1,7 @@
 const recipes = require('../model/recipeModel');
 
 exports.getAllRecipesController = async (req, res) => {
-    console.log("---------------Inside getAllRecipesController---------------");
+    console.log("--------Inside getAllRecipesController--------");
     
     try{
         const allRecipes = await recipes.find();

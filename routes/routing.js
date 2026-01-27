@@ -1,6 +1,7 @@
 const express = require('express');
 const recipeController = require('../controller/recipeController');
 const userController = require('../controller/userController');
+const jwtMiddleware = require('../middlewares/jwtMiddleware')
 
 const router = express.Router();
 
@@ -25,7 +26,11 @@ router.put('/user/:userId', userController.updateUserController);
 // get all recipe router
 router.get('/recipes', recipeController.getAllRecipesController);
 
+//-------------------For Autherized users----------------------
 // get recipe by id
-router.get('/recipes/:id', recipeController.viewRecipeController);
+router.get('/recipes/:id', jwtMiddleware, recipeController.viewRecipeController);
+
+// get related recipes by cuisine
+router.get('/recipes-related', jwtMiddleware, recipeController.relatedRecipeController);
 
 module.exports = router;

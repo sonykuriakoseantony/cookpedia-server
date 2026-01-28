@@ -1,6 +1,9 @@
 const express = require('express');
 const recipeController = require('../controller/recipeController');
 const userController = require('../controller/userController');
+const downloadsController = require('../controller/downloadController');
+const saveRecipeController = require('../controller/saveRecipeController');
+
 const jwtMiddleware = require('../middlewares/jwtMiddleware')
 
 const router = express.Router();
@@ -32,5 +35,14 @@ router.get('/recipes/:id', jwtMiddleware, recipeController.viewRecipeController)
 
 // get related recipes by cuisine
 router.get('/recipes-related', jwtMiddleware, recipeController.relatedRecipeController);
+
+// download recipe
+router.post('/downloads/:id', jwtMiddleware, downloadsController.addToDownloadsController);
+
+// save recipe
+router.post('/save-recipe/:id', jwtMiddleware, saveRecipeController.saveRecipeToCollectionController);
+
+// get saves recipes
+router.get('/saved-recipes', jwtMiddleware, saveRecipeController.getAllSavedRecipesController);
 
 module.exports = router;

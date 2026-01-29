@@ -38,3 +38,16 @@ exports.getAllSavedRecipesController = async (req, res) =>{
         console.log(err);
     }
 }
+
+// remove saved item for loggedin users
+exports.removeSavedRecipesController = async (req, res) =>{
+    console.log("Inside removeSavedRecipesController");
+    const {id} = req.params;
+    try{
+        const recipeDetails = await savedRecipes.findByIdAndDelete({_id : id});
+        res.status(200).json(recipeDetails);
+    }catch(err){
+        res.status(500).json(err);
+        console.log(err);
+    }
+}

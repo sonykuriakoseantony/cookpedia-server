@@ -42,7 +42,10 @@ router.post('/downloads/:id', jwtMiddleware, downloadsController.addToDownloadsC
 // save recipe
 router.post('/save-recipe/:id', jwtMiddleware, saveRecipeController.saveRecipeToCollectionController);
 
-// get saves recipes
+// get saved recipes
 router.get('/saved-recipes', jwtMiddleware, saveRecipeController.getAllSavedRecipesController);
+
+// delete saved recipes
+router.delete('/saved-recipes/:id/delete', jwtMiddleware, saveRecipeController.removeSavedRecipesController);
 
 module.exports = router;

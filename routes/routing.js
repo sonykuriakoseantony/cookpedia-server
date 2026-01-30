@@ -3,6 +3,7 @@ const recipeController = require('../controller/recipeController');
 const userController = require('../controller/userController');
 const downloadsController = require('../controller/downloadController');
 const saveRecipeController = require('../controller/saveRecipeController');
+const feedbackController = require('../controller/feedbackController');
 
 const jwtMiddleware = require('../middlewares/jwtMiddleware')
 
@@ -23,6 +24,13 @@ router.get('/user/:userId', userController.getUserController);
 
 // update user profile
 router.put('/user/:userId', userController.updateUserController);
+
+//----------------Feedback CRUD-------------------
+// add feedbacks
+router.post('/feedback/add', feedbackController.addFeedbackController);
+
+// fecth feedbacks
+router.get('/feedbacks', feedbackController.getAllFeedbacksController);
 
 
 //----------------Recipes CRUD-------------------
@@ -47,5 +55,7 @@ router.get('/saved-recipes', jwtMiddleware, saveRecipeController.getAllSavedReci
 
 // delete saved recipes
 router.delete('/saved-recipes/:id/delete', jwtMiddleware, saveRecipeController.removeSavedRecipesController);
+
+
 
 module.exports = router;

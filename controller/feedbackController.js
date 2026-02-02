@@ -26,3 +26,15 @@ exports.getAllFeedbacksController = async (req, res) => {
         console.log(err);
     }
 }
+
+// get approved feedbacks
+exports.getApprovedFeedbacksController = async (req, res) => {
+    console.log("--------Inside getApprovedFeedbacksController--------");
+    try{
+        const approvedFeedbacks = await feedbacks.find({status : {$eq : 'approved'}});
+        res.status(200).json(approvedFeedbacks);
+    }catch(err){
+        res.status(500).json(err);
+        console.log(err);
+    }
+}

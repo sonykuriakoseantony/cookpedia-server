@@ -9,6 +9,7 @@ const server = express();
 server.use(cors()); // to allow cross origin requests
 server.use(express.json()); // for the server to understand the data shared in json format call the json middleware
 server.use(router);
+server.use('/uploads', express.static('./uploads'))
 
 const PORT = process.env.PORT || 3000;
 

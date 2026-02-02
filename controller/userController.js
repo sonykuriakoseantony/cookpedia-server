@@ -112,3 +112,20 @@ exports.updateUserController = async(req, res) => {
         console.log(err);
     }
 }
+
+// update user image 
+exports.updateUserImageController = async(req, res) => {
+    console.log("--------Inside updateUserImageController--------");
+    const uploadPictureFile = req.file;
+    const {id} = req.params
+    try{
+
+        const existingUser = await users.findOne({_id : id});
+        existingUser.picture = uploadPictureFile.filename;
+        await existingUser.save();
+        res.status(200).json(existingUser);
+    }catch(err){
+        res.status(500).json(err);
+        console.log(err);
+    }
+}

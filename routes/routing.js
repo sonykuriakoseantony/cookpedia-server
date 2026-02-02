@@ -5,7 +5,8 @@ const downloadsController = require('../controller/downloadController');
 const saveRecipeController = require('../controller/saveRecipeController');
 const feedbackController = require('../controller/feedbackController');
 
-const jwtMiddleware = require('../middlewares/jwtMiddleware')
+const jwtMiddleware = require('../middlewares/jwtMiddleware');
+const multerMiddleWare = require('../middlewares/multerMiddleware');
 
 const router = express.Router();
 
@@ -25,12 +26,18 @@ router.get('/user/:userId', userController.getUserController);
 // update user profile
 router.put('/user/:userId', userController.updateUserController);
 
+// update user picture
+router.put('/users/:id', jwtMiddleware, multerMiddleWare.single('picture'), userController.updateUserImageController);
+
 //----------------Feedback CRUD-------------------
 // add feedbacks
 router.post('/feedback/add', feedbackController.addFeedbackController);
 
 // fecth feedbacks
 router.get('/feedbacks', feedbackController.getAllFeedbacksController);
+
+// get approved feedbacks
+router.get('/approved-feedbacks', feedbackController.getApprovedFeedbacksController);
 
 
 //----------------Recipes CRUD-------------------
@@ -46,6 +53,9 @@ router.get('/recipes-related', jwtMiddleware, recipeController.relatedRecipeCont
 
 // download recipe
 router.post('/downloads/:id', jwtMiddleware, downloadsController.addToDownloadsController);
+
+// get user downloaded recipe
+router.get('/user-downloads', jwtMiddleware, downloadsController.getUserDownloadListController);
 
 // save recipe
 router.post('/save-recipe/:id', jwtMiddleware, saveRecipeController.saveRecipeToCollectionController);

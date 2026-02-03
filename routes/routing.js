@@ -6,6 +6,7 @@ const saveRecipeController = require('../controller/saveRecipeController');
 const feedbackController = require('../controller/feedbackController');
 
 const jwtMiddleware = require('../middlewares/jwtMiddleware');
+const adminMiddleware = require('../middlewares/jwtMiddleware');
 const multerMiddleWare = require('../middlewares/multerMiddleware');
 
 const router = express.Router();
@@ -56,6 +57,9 @@ router.post('/downloads/:id', jwtMiddleware, downloadsController.addToDownloadsC
 
 // get user downloaded recipe
 router.get('/user-downloads', jwtMiddleware, downloadsController.getUserDownloadListController);
+
+// get all downloaded recipes by admin
+router.get('/downloads', adminMiddleware, downloadsController.getAllDownloadsController);
 
 // save recipe
 router.post('/save-recipe/:id', jwtMiddleware, saveRecipeController.saveRecipeToCollectionController);

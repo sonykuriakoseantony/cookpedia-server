@@ -51,6 +51,9 @@ router.put('/feedbacks/:id/update', adminMiddleware, feedbackController.updateFe
 // add recipe by admin
 router.post('/recipes/add', adminMiddleware, recipeController.addRecipeController);
 
+// edit recipe by admin
+router.put('/recipes/:id/update', adminMiddleware, recipeController.editRecipeController);
+
 // get all recipe router
 router.get('/recipes', recipeController.getAllRecipesController);
 

@@ -92,6 +92,18 @@ exports.getUserController = async(req, res) => {
     }
 }
 
+//get all users by admin
+exports.getAllUsersController = async(req, res) => {
+    console.log("--------Inside getAllUsersController--------");
+    try{
+        const allUsers = await users.find({role : {$eq : "user"}});
+        res.status(200).json(allUsers);
+    }catch(err){
+        res.status(500).json(err);
+        console.log(err);
+    }
+}
+
 // update user profile
 exports.updateUserController = async(req, res) => {
     console.log("--------Inside updateUserController--------");

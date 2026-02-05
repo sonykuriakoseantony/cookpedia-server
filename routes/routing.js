@@ -30,18 +30,27 @@ router.put('/user/:userId', userController.updateUserController);
 // update user picture
 router.put('/users/:id', jwtMiddleware, multerMiddleWare.single('picture'), userController.updateUserImageController);
 
+// get all users
+router.get('/users', adminMiddleware, userController.getAllUsersController);
+
 //----------------Feedback CRUD-------------------
 // add feedbacks
 router.post('/feedback/add', feedbackController.addFeedbackController);
 
-// fecth feedbacks
-router.get('/feedbacks', feedbackController.getAllFeedbacksController);
-
-// get approved feedbacks
+// get approved feedbacks in home page
 router.get('/approved-feedbacks', feedbackController.getApprovedFeedbacksController);
+
+// fecth all feedbacks by admin
+router.get('/feedbacks', adminMiddleware, feedbackController.getAllFeedbacksController);
+
+// update feedbacks by admin
+router.put('/feedbacks/:id/update', adminMiddleware, feedbackController.updateFeedbackController);
 
 
 //----------------Recipes CRUD-------------------
+// add recipe by admin
+router.post('/recipes/add', adminMiddleware, recipeController.addRecipeController);
+
 // get all recipe router
 router.get('/recipes', recipeController.getAllRecipesController);
 

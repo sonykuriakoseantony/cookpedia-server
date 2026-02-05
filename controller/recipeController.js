@@ -37,3 +37,27 @@ exports.relatedRecipeController = async (req, res) => {
         console.log(err);
     }
 }
+
+//add recipe
+exports.addRecipeController = async (req, res) => {
+    console.log("--------Inside addRecipeController--------");
+
+    const {name, ingredients, instructions, prepTimeMinutes, cookTimeMinutes, servings, difficulty, cuisine, caloriesPerServing, image, mealType } = req.body;
+    
+    try{
+        const existingRecipe = await recipes.findOne({name});
+        if(existingRecipe){
+            res.status(409).json("Recipe already exists. Add a new recipes")
+        }
+        else{
+            const newRecipe = await recipes.create({
+                name, ingredients, instructions, prepTimeMinutes, cookTimeMinutes, servings, difficulty, cuisine, caloriesPerServing, image, mealType
+            })
+            res.status(200).json(newRecipe);
+        }
+    }catch(err){
+        res.status(500).json(err);
+        console.log(err);
+    }
+    
+}

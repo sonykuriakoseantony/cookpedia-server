@@ -38,3 +38,22 @@ exports.getApprovedFeedbacksController = async (req, res) => {
         console.log(err);
     }
 }
+
+//update feedback status
+exports.updateFeedbackController = async (req, res) => {
+    console.log("Inside updateFeedbackController");
+
+    console.log(req.body);
+    
+    const { id } = req.params;
+    const { status } = req.body;
+    try {
+        const updateFeedback = await feedbacks.findById({_id : id});
+        updateFeedback.status = status;
+        await updateFeedback.save();
+        res.status(200).json(updateFeedback);
+    } catch (err) {
+        res.status(500).json(err);
+        console.log(err);
+    }
+}

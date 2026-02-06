@@ -54,8 +54,12 @@ router.post('/recipes/add', adminMiddleware, recipeController.addRecipeControlle
 // edit recipe by admin
 router.put('/recipes/:id/update', adminMiddleware, recipeController.editRecipeController);
 
+// delete recipe by admin
+router.delete('/recipes/:id/delete', adminMiddleware, recipeController.removeRecipeController);
+
 // get all recipe router
 router.get('/recipes', recipeController.getAllRecipesController);
+
 
 //-------------------For Autherized users----------------------
 // get recipe by id
